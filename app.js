@@ -23,6 +23,8 @@ O que deve acontecer quando a página recarrega?
 
 
 import { renderTrasacoes } from "./modules/ui.js";
+import { saveToStorage, loadFromStorage } from "./modules/storage.js";
+import { getTransacoes, setTransacoes, addTransacao } from "./modules/state.js";
 
 // Seleção de elementos do DOM
 const btnAdicionar = document.querySelector(".adiciona-historia");// Botão para adicionar transação
@@ -30,7 +32,12 @@ const descricaoInput = document.getElementById("descricao");// Input para descri
 const valorInput = document.getElementById("quantidade");// Input para valor da transação
 const tipoSelect = document.getElementById("tipo-transacao");// Select para tipo de transação (receita ou despesa)
 
-let transacoes = [];
+
+//Ao iniciar app -> carregar do storage
+const dadosGuardados = loadFromStorage();
+setTransacoes(dadosGuardados);
+renderTrasacoes(getTransacoes());
+
 
 btnAdicionar.addEventListener("click", () => {
   
@@ -50,9 +57,10 @@ btnAdicionar.addEventListener("click", () => {
     valor: valor
   };
 
-  transacoes.push(novaTransacao);
+  addTransacao(novaTransacao);
 
-  renderTrasacoes(transacoes);
+  renderTrasacoes(getTransacoes());
+  saveToStorage(getTransacoes()); //guardar sempre após alteração
 
   // limpar campos do form depois de adicionar
   descricaoInput.value = "";
