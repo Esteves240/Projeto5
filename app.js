@@ -46,7 +46,12 @@ btnAdicionar.addEventListener("click", () => {
   const tipo = tipoSelect.value;
 
   if (!descricao || !valor) {
-    alert("Preenche todos os campos!");
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  if (valor <= 0) {
+    alert("Valor deve ser positivo!");
     return;
   }
 
