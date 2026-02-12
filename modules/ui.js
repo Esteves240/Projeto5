@@ -20,9 +20,9 @@ Como aplicar classes diferentes para receita e despesa?
 */
 
 const lista = document.querySelector(".lista-transacoes");// Lista onde as trasações serão renderizados
-// renderizar transações
+
 export function renderTrasacoes(transacoes) { 
-  lista.innerHTML = "";                            // Limpar lista antes de renderizar
+  lista.innerHTML = ""; // Limpar lista antes de renderizar
 // Criar <li> para cada transação
   transacoes.forEach(transacao => {
     const li = document.createElement("li");
@@ -55,8 +55,18 @@ export function renderResumo(resumo) {
   cardSaldo.textContent = `${resumo.saldo.toFixed(2)}€`;
 
 
-  //mudar a cor do saldo-----------------------------------------------
-  // saldoEl.classList.toggle("positivo", resumo.saldo >= 0);
-  // saldoEl.classList.toggle("negativo", resumo.saldo < 0);
-  //-----------------------------------------------------------------
+
+   if(resumo.saldo === 0) {
+
+   }else if(resumo.saldo >= 0){
+    cardSaldo.classList.add('positivo');
+  } else {
+    cardSaldo.classList.add('negativo');
+  }
 }
+
+
+
+//----------------------
+//apagar transaçoes
+//----------------------
