@@ -26,6 +26,9 @@ import { renderTrasacoes } from "./modules/ui.js";
 import { saveToStorage, loadFromStorage } from "./modules/storage.js";
 import { getTransacoes, setTransacoes, addTransacao } from "./modules/state.js";
 
+import { calcularResumo } from "./modules/transactions.js";
+import { renderResumo } from "./modules/ui.js";
+
 // Seleção de elementos do DOM
 const btnAdicionar = document.querySelector(".adiciona-historia");// Botão para adicionar transação
 const descricaoInput = document.getElementById("descricao");// Input para descrição da transação
@@ -65,9 +68,23 @@ btnAdicionar.addEventListener("click", () => {
   addTransacao(novaTransacao);
 
   renderTrasacoes(getTransacoes());
+
+  //atuaizar os 3 resumos do inicio
+const resumoAtualizado = calcularResumo(getTransacoes());
+    renderResumo(resumoAtualizado);
+
   saveToStorage(getTransacoes()); //guardar sempre após alteração
 
   // limpar campos do form depois de adicionar
   descricaoInput.value = "";
   valorInput.value = "";
 });
+
+
+
+
+//Resumo do inicio
+const resumo = calcularResumo(getTransacoes());
+renderResumo(resumo);
+
+

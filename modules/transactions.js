@@ -25,3 +25,23 @@ Resultado esperado: 250
 
 Não escreva loops tradicionais.
 */
+
+export function calcularResumo(transacoes) {
+
+  const totalReceitas = transacoes
+    .filter(t => t.categoria === "Receita")
+    .reduce((acc, t) => acc + t.valor, 0);
+
+  const totalDespesas = transacoes
+    .filter(t => t.categoria === "Despesa")
+    .reduce((acc, t) => acc + t.valor, 0);
+
+  const saldo = totalReceitas - totalDespesas;
+
+  return {
+    totalReceitas,
+    totalDespesas,
+    saldo
+  };
+}
+

@@ -42,3 +42,21 @@ export function renderTrasacoes(transacoes) {
     lista.appendChild(li);
   });
 }
+
+
+const cardReceitas = document.querySelector(".valor-receita");
+const cardDespesas = document.querySelector(".valor-despesa");
+const cardSaldo = document.querySelector(".valor-saldo");
+
+
+export function renderResumo(resumo) {
+  cardReceitas.textContent = `${resumo.totalReceitas.toFixed(2)}€`;
+  cardDespesas.textContent = `${resumo.totalDespesas.toFixed(2)}€`;
+  cardSaldo.textContent = `${resumo.saldo.toFixed(2)}€`;
+
+
+  //mudar a cor do saldo-----------------------------------------------
+  // saldoEl.classList.toggle("positivo", resumo.saldo >= 0);
+  // saldoEl.classList.toggle("negativo", resumo.saldo < 0);
+  //-----------------------------------------------------------------
+}
