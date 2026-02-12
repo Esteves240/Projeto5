@@ -293,6 +293,10 @@ body {
     margin-bottom: 8px;
 }
 
+option{
+       background-color: var( --secondary-color);
+    }
+
 .categorias {
     color: var(--accent-color);
     font-size: 12px;
