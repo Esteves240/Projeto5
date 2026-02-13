@@ -23,11 +23,11 @@ O que deve acontecer quando a página recarrega?
 
 
 import { renderTrasacoes } from "./modules/ui.js";
-import { saveToStorage, loadFromStorage } from "./modules/storage.js";
+import { saveToStorage, loadFromStorage, guardarTema, lerTema } from "./modules/storage.js";
 import { getTransacoes, setTransacoes, addTransacao, removeTransacao} from "./modules/state.js";
 
 import { calcularResumo } from "./modules/transactions.js";
-import { renderResumo } from "./modules/ui.js";
+import { renderResumo, aplicarTema } from "./modules/ui.js";
 
 
 // Seleção de elementos do DOM
@@ -35,6 +35,8 @@ const btnAdicionar = document.querySelector(".adiciona-historia");// Botão para
 const descricaoInput = document.getElementById("descricao");// Input para descrição da transação
 const valorInput = document.getElementById("quantidade");// Input para valor da transação
 const tipoSelect = document.getElementById("tipo-transacao");// Select para tipo de transação (receita ou despesa)
+
+const btnTema = document.querySelector(".theme");// Botão para alternar tema
 
 
 function atualizarUI() {
@@ -60,6 +62,11 @@ const dadosGuardados = loadFromStorage();
 setTransacoes(dadosGuardados);
 //renderTrasacoes(getTransacoes());
 atualizarUI()
+
+let temaAtual = lerTema();
+
+// aplicar tema guardado
+aplicarTema(temaAtual);
 
 
 
@@ -94,4 +101,13 @@ btnAdicionar.addEventListener("click", () => {
   // limpar campos do form depois de adicionar
   descricaoInput.value = "";
   valorInput.value = "";
+});
+
+
+
+// Alternar tema
+btnTema.addEventListener("click", () => {
+  temaAtual = temaAtual === "light" ? "dark" : "light";
+  guardarTema(temaAtual);
+  aplicarTema(temaAtual);
 });

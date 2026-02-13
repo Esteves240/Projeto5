@@ -53,6 +53,7 @@ export function renderTrasacoes(transacoes, onDelete) {
 const cardReceitas = document.querySelector(".valor-receita");
 const cardDespesas = document.querySelector(".valor-despesa");
 const cardSaldo = document.querySelector(".valor-saldo");
+const main = document.querySelector(".main");
 
 
 export function renderResumo(resumo) {
@@ -70,4 +71,10 @@ export function renderResumo(resumo) {
   } else {
     cardSaldo.classList.add('negativo');
   }
+}
+
+
+
+export function aplicarTema(tema) {
+  main.classList.toggle("dark", tema === "dark");
 }

@@ -37,3 +37,16 @@ export function loadFromStorage() {
 
   return dados ? JSON.parse(dados) : [];// Retorna array vazio se não houver dados
 }
+
+
+
+// TEMA (sessionStorage)
+// Guardar o tema (light ou dark)
+export function guardarTema(tema) {
+  sessionStorage.setItem("tema", tema);
+}
+
+// Ler o tema (light ou dark)
+export function lerTema() {
+  return sessionStorage.getItem("tema") || "light";
+}
