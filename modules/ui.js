@@ -21,8 +21,9 @@ Como aplicar classes diferentes para receita e despesa?
 
 const lista = document.querySelector(".lista-transacoes");// Lista onde as trasações serão renderizados
 
-export function renderTrasacoes(transacoes) { 
+export function renderTrasacoes(transacoes, onDelete) { 
   lista.innerHTML = ""; // Limpar lista antes de renderizar
+
 // Criar <li> para cada transação
   transacoes.forEach(transacao => {
     const li = document.createElement("li");
@@ -37,8 +38,13 @@ export function renderTrasacoes(transacoes) {
       <div class="valor-transacao ${transacao.categoria === "Despesa" ? "negativo" : "positivo"}">
         ${transacao.valor.toFixed(2)}€
       </div>
+
+      <button class="btn-delete">🗑️</button>
     `;
-    
+
+   li.querySelector(".btn-delete")
+      .addEventListener("click", () => onDelete(transacao.id));
+
     lista.appendChild(li);
   });
 }
@@ -55,18 +61,13 @@ export function renderResumo(resumo) {
   cardSaldo.textContent = `${resumo.saldo.toFixed(2)}€`;
 
 
+  cardSaldo.classList.remove("neutro", "positivo", "negativo");
 
    if(resumo.saldo === 0) {
-
+    cardSaldo.classList.add('neutro');
    }else if(resumo.saldo >= 0){
     cardSaldo.classList.add('positivo');
   } else {
     cardSaldo.classList.add('negativo');
   }
 }
-
-
-
-//----------------------
-//apagar transaçoes
-//----------------------
