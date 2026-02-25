@@ -22,12 +22,12 @@ O que deve acontecer quando a página recarrega?
 */
 
 
-import { renderTrasacoes } from "./modules/ui.js";
-import { saveToStorage, loadFromStorage, guardarTema, lerTema } from "./modules/storage.js";
-import { getTransacoes, setTransacoes, addTransacao, removeTransacao} from "./modules/state.js";
+import { renderTrasacoes } from "./src/modules/ui.js";
+import { saveToStorage, loadFromStorage, guardarTema, lerTema } from "./src/modules/storage.js";
+import { getTransacoes, setTransacoes, addTransacao, removeTransacao} from "./src/modules/state.js";
 
-import { calcularResumo } from "./modules/transactions.js";
-import { renderResumo, aplicarTema } from "./modules/ui.js";
+import { calcularResumo } from "./src/modules/transactions.js";
+import { renderResumo, aplicarTema } from "./src/modules/ui.js";
 
 
 // Seleção de elementos do DOM
