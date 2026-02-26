@@ -23,16 +23,17 @@ localStorage só aceita strings.
 */
 
 
+import Transaction from "../interfaces/transaction.js";
 
 const STORAGE_KEY = "transacoes";// Chave fixa para armazenar as transações
 
 //Guardar transações no localStorage
-export function saveToStorage(transacoes) {
+export function saveToStorage(transacoes: Transaction[]) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(transacoes));
 }
 
 // Carregar transações do localStorage
-export function loadFromStorage() {
+export function loadFromStorage(): Transaction[] {
   const dados = localStorage.getItem(STORAGE_KEY);
 
   return dados ? JSON.parse(dados) : [];// Retorna array vazio se não houver dados
@@ -42,11 +43,11 @@ export function loadFromStorage() {
 
 // TEMA (sessionStorage)
 // Guardar o tema (light ou dark)
-export function guardarTema(tema) {
+export function guardarTema(tema: string) {
   sessionStorage.setItem("tema", tema);
 }
 
 // Ler o tema (light ou dark)
-export function lerTema() {
+export function lerTema(): string {
   return sessionStorage.getItem("tema") || "light";
 }
