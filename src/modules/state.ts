@@ -19,9 +19,9 @@ REFLEXÃO:
 DESAFIO:
 Como garantir que o array nunca fique fora de sincronia?
 */
+import Transaction from "../interfaces/transaction.js";
 
-
-let transacoes = []; 
+let transacoes: Transaction[] = []; 
 
 // Função para obter transações atuais
 export function getTransacoes() {
@@ -29,16 +29,16 @@ export function getTransacoes() {
 }
 
 // Função para definir transações (usada ao carregar do storage)
-export function setTransacoes(novas) {
+export function setTransacoes(novas: Transaction[]) {
   transacoes = novas;
 }
 
 // Função para adicionar nova transação
-export function addTransacao(transacao) {
+export function addTransacao(transacao: Transaction): void {
   transacoes.push(transacao);
 }
 
 // Função para remover transação por ID
-export function removeTransacao(id) {
+export function removeTransacao(id: string): void {
   transacoes = transacoes.filter(transacao => transacao.id !== id);
 }
