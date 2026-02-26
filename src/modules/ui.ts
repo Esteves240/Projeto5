@@ -18,11 +18,14 @@ REFLEXÃO:
 DESAFIO:
 Como aplicar classes diferentes para receita e despesa?
 */
-
+import Transaction from "../interfaces/transaction.js";
 const lista = document.querySelector(".lista-transacoes");// Lista onde as trasações serão renderizados
 
-export function renderTrasacoes(transacoes, onDelete) { 
-  lista.innerHTML = ""; // Limpar lista antes de renderizar
+export function renderTrasacoes(transacoes: Transaction[], onDelete) { 
+  if(!lista){
+    return
+  }
+lista.innerHTML = ""; // Limpar lista antes de renderizar
 
 // Criar <li> para cada transação
   transacoes.forEach(transacao => {
@@ -56,7 +59,7 @@ const cardSaldo = document.querySelector(".valor-saldo");
 const main = document.querySelector(".main");
 
 
-export function renderResumo(resumo) {
+export function renderResumo(resumo: number) {
   cardReceitas.textContent = `${resumo.totalReceitas.toFixed(2)}€`;
   cardDespesas.textContent = `${resumo.totalDespesas.toFixed(2)}€`;
   cardSaldo.textContent = `${resumo.saldo.toFixed(2)}€`;

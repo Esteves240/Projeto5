@@ -26,17 +26,20 @@ Resultado esperado: 250
 Não escreva loops tradicionais.
 */
 
-export function calcularResumo(transacoes) {
+import Transaction from "../interfaces/transaction.js";
 
-  const totalReceitas = transacoes
+
+export function calcularResumo(transacoes: Transaction[]) {
+
+  const totalReceitas: number = transacoes
     .filter(transacao => transacao.categoria === "Receita")
     .reduce((acumulador, transacao) => acumulador + transacao.valor, 0);
 
-  const totalDespesas = transacoes
+  const totalDespesas: number = transacoes
     .filter(transacao => transacao.categoria === "Despesa")
     .reduce((acumulador, transacao) => acumulador + transacao.valor, 0);
 
-  const saldo = totalReceitas - totalDespesas;
+  const saldo: number = totalReceitas - totalDespesas;
 
   return {
     totalReceitas,
