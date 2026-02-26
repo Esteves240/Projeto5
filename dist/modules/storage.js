@@ -21,36 +21,26 @@ PERGUNTAS PARA VOCÊ:
 DICA:
 localStorage só aceita strings.
 */
-
-
-import Transaction from "../interfaces/transaction.js";
-
-const STORAGE_KEY = "transacoes";// Chave fixa para armazenar as transações
-
+const STORAGE_KEY = "transacoes"; // Chave fixa para armazenar as transações
 //Guardar transações no localStorage
-export function saveToStorage(transacoes: Transaction[]) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(transacoes));
+export function saveToStorage(transacoes) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(transacoes));
 }
-
 // Carregar transações do localStorage
-export function loadFromStorage(): Transaction[] {
-  const dados = localStorage.getItem(STORAGE_KEY);
-
-  return dados ? JSON.parse(dados) : [];// Retorna array vazio se não houver dados
+export function loadFromStorage() {
+    const dados = localStorage.getItem(STORAGE_KEY);
+    return dados ? JSON.parse(dados) : []; // Retorna array vazio se não houver dados
 }
-
-
-
 // TEMA (sessionStorage)
 // Guardar o tema (light ou dark)
-export function guardarTema(tema: string) {
-  sessionStorage.setItem("tema", tema);
+export function guardarTema(tema) {
+    sessionStorage.setItem("tema", tema);
 }
-
 // Ler o tema (light ou dark)
-export function lerTema(): "light" | "dark" {
-  const tema = sessionStorage.getItem("tema");
-
-  if (tema === "dark") return "dark";
-  return "light";
+export function lerTema() {
+    const tema = sessionStorage.getItem("tema");
+    if (tema === "dark")
+        return "dark";
+    return "light";
 }
+//# sourceMappingURL=storage.js.map
