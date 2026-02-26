@@ -22,26 +22,24 @@ O que deve acontecer quando a página recarrega?
 */
 
 
-import { renderTrasacoes } from "./modules/ui.js";
-import { saveToStorage, loadFromStorage, guardarTema, lerTema } from "./modules/storage.js";
-import { getTransacoes, setTransacoes, addTransacao, removeTransacao} from "./modules/state.js";
-
+import Transaction from "./interfaces/transaction.js";
+import { renderTrasacoes, renderResumo, aplicarTema } from "./modules/ui.js";
+import {saveToStorage, loadFromStorage, guardarTema, lerTema,} from "./modules/storage.js";
+import {getTransacoes, setTransacoes, addTransacao, removeTransacao,} from "./modules/state.js";
 import { calcularResumo } from "./modules/transactions.js";
-import { renderResumo, aplicarTema } from "./modules/ui.js";
 
+const btnAdicionar = document.querySelector(".adiciona-historia") as HTMLButtonElement | null;
 
-// Seleção de elementos do DOM
-const btnAdicionar = document.querySelector(".adiciona-historia");// Botão para adicionar transação
-const descricaoInput = document.getElementById("descricao");// Input para descrição da transação
-const valorInput = document.getElementById("quantidade");// Input para valor da transação
-const tipoSelect = document.getElementById("tipo-transacao");// Select para tipo de transação (receita ou despesa)
+const descricaoInput = document.getElementById("descricao") as HTMLInputElement | null;
 
-const btnTema = document.querySelector(".theme");// Botão para alternar tema
+const valorInput = document.getElementById("quantidade") as HTMLInputElement | null;
 
+const tipoSelect = document.getElementById("tipo-transacao") as HTMLSelectElement | null;
 
-function atualizarUI() {
+const btnTema = document.querySelector(".theme") as HTMLButtonElement | null;
+
+function atualizarUI(): void {
   const transacoes = getTransacoes();
-
   renderTrasacoes(transacoes, handleDelete);
 
   const resumo = calcularResumo(transacoes);
@@ -50,28 +48,22 @@ function atualizarUI() {
   saveToStorage(transacoes);
 }
 
-
-function handleDelete(id) {
+function handleDelete(id: string): void {
   removeTransacao(id);
   atualizarUI();
 }
 
-
-//Ao iniciar app -> carregar do storage
+// Carregar dados do storage
 const dadosGuardados = loadFromStorage();
 setTransacoes(dadosGuardados);
-//renderTrasacoes(getTransacoes());
-atualizarUI()
+atualizarUI();
 
-let temaAtual = lerTema();
-
-// aplicar tema guardado
+let temaAtual = lerTema(); 
 aplicarTema(temaAtual);
 
+btnAdicionar?.addEventListener("click", () => {
+  if (!descricaoInput || !valorInput || !tipoSelect) return;
 
-
-btnAdicionar.addEventListener("click", () => {
-  
   const descricao = descricaoInput.value.trim();
   const valor = Number(valorInput.value);
   const tipo = tipoSelect.value;
@@ -86,27 +78,22 @@ btnAdicionar.addEventListener("click", () => {
     return;
   }
 
-  const novaTransacao = {
-    id: Date.now(),
-    transacao: descricao,
+  const novaTransacao: Transaction = {
+    id: Date.now().toString(),
+    descricao,
     categoria: tipo === "receita" ? "Receita" : "Despesa",
     data: new Date().toLocaleDateString(),
-    valor: valor
+    valor,
   };
 
   addTransacao(novaTransacao);
   atualizarUI();
 
-
-  // limpar campos do form depois de adicionar
   descricaoInput.value = "";
   valorInput.value = "";
 });
 
-
-
-// Alternar tema
-btnTema.addEventListener("click", () => {
+btnTema?.addEventListener("click", () => {
   temaAtual = temaAtual === "light" ? "dark" : "light";
   guardarTema(temaAtual);
   aplicarTema(temaAtual);

@@ -48,6 +48,9 @@ export function guardarTema(tema: string) {
 }
 
 // Ler o tema (light ou dark)
-export function lerTema(): string {
-  return sessionStorage.getItem("tema") || "light";
+export function lerTema(): "light" | "dark" {
+  const tema = sessionStorage.getItem("tema");
+
+  if (tema === "dark") return "dark";
+  return "light";
 }
