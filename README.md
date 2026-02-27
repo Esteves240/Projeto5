@@ -1,4 +1,7 @@
-# Projeto3
+# Projeto5
+
+Transição do Projeto3 para TS
+
 Aplicação web de controlo financeiro pessoal 
 
 Dashboard Financeiro Pessoal (Vanilla JavaScript)
